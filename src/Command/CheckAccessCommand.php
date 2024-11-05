@@ -23,7 +23,13 @@ class CheckAccessCommand implements Command
         $username = $args[2];
         $functionName = $args[3];
 
-        return $this->accessService->checkAccess($username, $functionName);
+        if ($this->accessService->checkAccess($username, $functionName)) {
+            echo "Access allowed.\n";
+        } else {
+            echo "Access deny.\n";
+        }
+
+        exit(1);
     }
 
     private function validateArgs(array $args): void

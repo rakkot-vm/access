@@ -14,19 +14,13 @@ use App\Repository\FunctionRepository;
 class AccessService
 {
     private UserRepository $userRepository;
-    private GroupRepository $groupRepository;
-    private ModuleRepository $moduleRepository;
     private FunctionRepository $functionRepository;
 
     public function __construct(
         UserRepository $userRepository,
-        GroupRepository $groupRepository,
-        ModuleRepository $moduleRepository,
         FunctionRepository $functionRepository
     ) {
         $this->userRepository = $userRepository;
-        $this->groupRepository = $groupRepository;
-        $this->moduleRepository = $moduleRepository;
         $this->functionRepository = $functionRepository;
     }
 
@@ -42,6 +36,6 @@ class AccessService
             throw new FunctionNotFoundException();
         }
 
-        die(var_dump( $this->userRepository->complexCheckAccessByIds($user->id, $function->id)));
+        return $this->userRepository->complexCheckAccessByIds($user->id, $function->id);
     }
 }
